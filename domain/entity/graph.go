@@ -11,7 +11,7 @@ type Graph struct {
 	Plot *plot.Plot
 }
 
-func New(id uint, title, xLabel, yLabel string, data plotter.XYs) (*Graph, error) {
+func NewGraph(id uint, title, xLabel, yLabel string, data plotter.XYs) (*Graph, error) {
 	p := plot.New()
 	p.Title.Text = title
 	p.X.Label.Text = xLabel

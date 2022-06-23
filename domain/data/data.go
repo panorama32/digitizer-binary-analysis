@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/panorama32/digitizer-binary-analysis/domain/rawdata"
 	"github.com/panorama32/digitizer-binary-analysis/domain/service"
@@ -30,6 +31,13 @@ func New(dirpath string) (*Data, error) {
 			return nil, errors.New("invalid dir path")
 		}
 		filename := file.Name()
+		extPos := strings.LastIndex(filename, ".")
+		if extPos == -1 {
+			return nil, errors.New("extension not found")
+		}
+		if filename[extPos:] != ".raw" {
+			continue
+		}
 		rd, _ := rawdata.New(dirpath + "/" + filename)
 		rds = append(rds, rd)
 	}
